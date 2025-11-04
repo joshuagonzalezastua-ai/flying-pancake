@@ -1,5 +1,5 @@
 # FROM openjdk:8-jre-alpine
-FROM openjdk:11-jre-slim
+FROM openjdk:8-jre-slim
 
 EXPOSE 8080
 
