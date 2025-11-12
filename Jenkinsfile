@@ -16,7 +16,7 @@ pipeline {
         stage('Build') {
             steps {
                 sh 'chmod +x gradlew'
-                sh './gradlew clean build'
+                sh './gradlew clean build --no-daemon'
             }
         }
 
@@ -28,7 +28,7 @@ pipeline {
                     withSonarQubeEnv("${SONARQUBE_ENV}") {
                         sh """
                             ${scannerHome}/bin/sonar-scanner \
-                            -Dsonar.projectKey=my-sample-project \
+                            -Dsonar.projectKey=flying-pancake \
                             -Dsonar.sources=. \
                             -Dsonar.host.url=$SONAR_HOST_URL \
                             -Dsonar.login=$SONAR_AUTH_TOKEN
