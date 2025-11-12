@@ -31,11 +31,25 @@ jobs:
     - name: List build outputs
       run: ls -l build/libs
 
-    - name: Build and Push Docker Image
-      uses: mr-smithers-excellent/docker-build-push@v4
+    - name: Log in to Docker Hub
+      uses: docker/login-action@v3
       with:
-        image: joshuagonzalez/my-app
-        registry: docker.io
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
+
+    - name: Build and Push Docker image
+      uses: docker/build-push-action@v6
+      with:
+        context: .
+        push: true
+        tags: joshuagonzalez/my-app:latest
+
+
+    # - name: Build and Push Docker Image
+    #   uses: mr-smithers-excellent/docker-build-push@v4
+    #   with:
+    #     image: joshuagonzalez/my-app
+    #     registry: docker.io
+    #     username: ${{ secrets.DOCKER_USERNAME }}
+    #     password: ${{ secrets.DOCKER_PASSWORD }}
          
